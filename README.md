@@ -8,5 +8,6 @@ install project:
     
   step 2 :
     npm install -g typescript
+    
   run project :
     tsc && node filename.ts
