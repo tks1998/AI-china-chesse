@@ -5,25 +5,37 @@ export class RuleReverse{
     static minCol = 1 ;
     static maxCol = 9 ;
     // R : reverse  , co tuong up   
-    static RpossibleMovesForMa(currRow, currCol, boardStates , Reverse ) {
+    // overide chesse si and tinh     
+    static possibleMovesForShi(currRow, currCol, boardStates, isLowerTeam) {
         var moves = [];
-        if (!([currRow + 1, currCol].toString() in boardStates)) {
-            moves.push([currRow + 2, currCol + 1]);
-            moves.push([currRow + 2, currCol - 1]);
-        }
-        if (!([currRow - 1, currCol].toString() in boardStates)) {
-            moves.push([currRow - 2, currCol + 1]);
-            moves.push([currRow - 2, currCol - 1]);
-        }
-        if (!([currRow, currCol + 1].toString() in boardStates)) {
-            moves.push([currRow + 1, currCol + 2]);
-            moves.push([currRow - 1, currCol + 2]);
-        }
-        if (!([currRow, currCol - 1].toString() in boardStates)) {
-            moves.push([currRow + 1, currCol - 2]);
-            moves.push([currRow - 1, currCol - 2]);
+        var dx = [-1,1,0,0];
+        var dy = [0,0,-1,1];
+        var newCol , newRow ;
+        for (var pos = 0 ; pos<3 ; pos++)
+        {
+            newRow = newRow + dx[pos] ; 
+            newCol = newCol + dy[pos] ;
+            if ( [newRow,newCol].toString() in boardStates)
+            {
+                moves.push([newRow,newCol]);
+            } 
         }
         return moves;
-    }   
-
+    }
+    static possibleMovesForShiang(currRow, currCol, boardStates, isLowerTeam)
+    {
+        var moves = [];
+        var dx = [-2,2,2,-2];
+        var dy = [-2,2,-2,2];
+        var newCol , newRow ;
+        for (var pos = 0 ; pos<3 ; pos++)
+        {
+            newRow = newRow + dx[pos] ; 
+            newCol = newCol + dy[pos] ;
+            if ( [newRow,newCol].toString() in boardStates)
+            {
+                moves.push([newRow,newCol]);
+            } 
+        }
+    }
 }
