@@ -227,14 +227,17 @@ export class Rule {
 
 
     // all legal moves for a piece in a board state
-    // boardStates: {posStr->[name, isMyPiece]}
+    // boardStates: {arr[ posStr ]->[name, isMyPiece]}
     // return [(row, col)]
     static possibleMoves = function(piece: Piece, boardStates: {}, isLowerTeam) {
-        var name = piece.name[0];
         var currRow = piece.position[0];
         var currCol = piece.position[1];
+        var reverse = piece.Reverse;
         var moves = [];
-
+        var name = piece.name[0]; // name is string  ,this name = one charater , so that  name of piece= string [0] 
+        var truthname = piece.truthname[0];
+        
+        if (reverse) piece.update(truthname);
         switch (name) {
             case 'j':
                 moves = this.possibleMovesForJu(currRow, currCol, boardStates);
@@ -268,7 +271,7 @@ export class Rule {
     static allPossibleMoves = function(myPieces: Piece[], boardStates: {}, team) {
         var moves = {};
         // team is in the lower part of the river
-        var isLowerTeam = (team == 1);
+        var isLowerTeam = (team == 1);  
         for (var i in myPieces) {
             var piece = myPieces[i];
             var moves4Piece = this.possibleMoves(piece, boardStates, isLowerTeam);
