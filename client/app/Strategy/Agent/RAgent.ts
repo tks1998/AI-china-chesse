@@ -1,6 +1,7 @@
 import { RPiece } from '../../Objects/RPiece';
 import { Rrule } from '../../Chinachess/rule/Rrule'
 import { RInitGame } from '../../Chinachess/InitGame/Rinit';
+import { stringify } from '@angular/core/src/facade/lang';
 
 export class RAgent {
     team: number;
@@ -101,5 +102,29 @@ export class RAgent {
 
     copyMoves() {
         return this.pastMoves.slice();
+    }
+
+    ComputePieceMove() {
+        var CountRealname =0 ;
+        var Realname = [] ;
+        var FakeName = [];
+        // fake name  
+        // real name 
+        // get name , count piece in board 
+        //
+        var allpiece = this.myPieces ;  // get have all piece in this board 
+        for (var i in this.myPieces)
+        {
+            if (this.myPieces[i].name == this.myPieces[i].truthname)
+            {
+                Realname[[this.myPieces[i].name[0]].toString()]++;
+            }
+            else 
+            {
+                FakeName[[this.myPieces[i].name[0]].toString()]++;
+            }
+        }
+        var NumberPiece = 16  ;
+        // 
     }
 }

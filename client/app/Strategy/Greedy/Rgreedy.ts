@@ -30,6 +30,7 @@ export class RgreedyAgent extends RAgent {
                 }
             }
         }
+        
         return [piece, toPos];
     }
 
