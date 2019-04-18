@@ -1,6 +1,6 @@
-import { Piece } from '../../Objects/Piece';
+import { RPiece } from '../../Objects/RPiece';
 
-export class InitGame {
+export class RInitGame {
     
     // random posistion chess 
     static RandomPosition(){
@@ -35,22 +35,22 @@ export class InitGame {
             random[ele] = RedTeam[ele];
         }
         return [
-            new Piece('j1', random[0],1,Tname[0]),
-            new Piece('j2', random[1],1,Tname[1]),
-            new Piece('p1', random[2],1,Tname[2]),
-            new Piece('p2', random[3],1,Tname[3]),
-            new Piece('m1', random[4],1,Tname[4]),
-            new Piece('m2', random[5],1,Tname[5]),
-            new Piece('x1', random[6],1,Tname[6]),
-            new Piece('x2', random[7],1,Tname[7]),
-            new Piece('s1', random[8],1,Tname[8]),
-            new Piece('s2', random[9],1,Tname[9]),
-            new Piece('z1', random[10],1,Tname[10]),
-            new Piece('z2', random[11],1,Tname[11]),
-            new Piece('z3', random[12],1,Tname[12]),
-            new Piece('z4', random[13],1,Tname[1),
-            new Piece('z5', random[14],1,Tname[14]),
-            new Piece('k', [1,5],1,'k')
+            new RPiece('noname', random[0],1,Tname[0]),
+            new RPiece('noname', random[1],1,Tname[1]),
+            new RPiece('noname', random[2],1,Tname[2]),
+            new RPiece('noname', random[3],1,Tname[3]),
+            new RPiece('noname', random[4],1,Tname[4]),
+            new RPiece('noname', random[5],1,Tname[5]),
+            new RPiece('noname', random[6],1,Tname[6]),
+            new RPiece('noname', random[7],1,Tname[7]),
+            new RPiece('noname', random[8],1,Tname[8]),
+            new RPiece('noname', random[9],1,Tname[9]),
+            new RPiece('noname', random[10],1,Tname[10]),
+            new RPiece('noname', random[11],1,Tname[11]),
+            new RPiece('noname', random[12],1,Tname[12]),
+            new RPiece('noname', random[13],1,Tname[13]),
+            new RPiece('noname', random[14],1,Tname[14]),
+            new RPiece('k', [1,5],1,'k')
         ];
     }
 
@@ -70,22 +70,22 @@ export class InitGame {
             Tname[ele]  = Newname[rand[ele]]; 
         }
         return [
-            new Piece('j1', random[0],1,Tname[0]),
-            new Piece('j2', random[1],1,Tname[1]),
-            new Piece('p1', random[2],1,Tname[2]),
-            new Piece('p2', random[3],1,Tname[3]),
-            new Piece('m1', random[4],1,Tname[4]),
-            new Piece('m2', random[5],1,Tname[5]),
-            new Piece('x1', random[6],1,Tname[6]),
-            new Piece('x2', random[7],1,Tname[7]),
-            new Piece('s1', random[8],1,Tname[8]),
-            new Piece('s2', random[9],1,Tname[9]),
-            new Piece('z1', random[10],1,Tname[10]),
-            new Piece('z2', random[11],1,Tname[11]),
-            new Piece('z3', random[12],1,Tname[12]),
-            new Piece('z4', random[13],1,Tname[13]),
-            new Piece('z5', random[14],1,Tname[14]),
-            new Piece('k', [1,5],1,'k')
+            new RPiece('noname', random[0],1,Tname[0]),
+            new RPiece('noname', random[1],1,Tname[1]),
+            new RPiece('noname', random[2],1,Tname[2]),
+            new RPiece('noname', random[3],1,Tname[3]),
+            new RPiece('noname', random[4],1,Tname[4]),
+            new RPiece('noname', random[5],1,Tname[5]),
+            new RPiece('noname', random[6],1,Tname[6]),
+            new RPiece('noname', random[7],1,Tname[7]),
+            new RPiece('noname', random[8],1,Tname[8]),
+            new RPiece('noname', random[9],1,Tname[9]),
+            new RPiece('noname', random[10],1,Tname[10]),
+            new RPiece('noname', random[11],1,Tname[11]),
+            new RPiece('noname', random[12],1,Tname[12]),
+            new RPiece('noname', random[13],1,Tname[13]),
+            new RPiece('noname', random[14],1,Tname[14]),
+            new RPiece('k', [10,5],1,'k')
         ];
     }
 }

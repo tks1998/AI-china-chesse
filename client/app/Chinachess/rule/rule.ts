@@ -1,21 +1,20 @@
 import { Piece } from '../../Objects/Piece';
-import {RuleReverse} from '../rule/Rrule';
 
 export class Rule {
-    static minRow = 1;
-    static maxRow = 10;
-    static minCol = 1;
-    static maxCol = 9;
+    private minRow = 1;
+    private maxRow = 10;
+    private minCol = 1;
+    private maxCol = 9;
 
 
-    static hasPieceOnRows(col, minRow, maxRow, boardStates: {}) {
+    public hasPieceOnRows(col, minRow, maxRow, boardStates: {}) {
         for (var i = minRow; i <= maxRow; i++) {
             if (boardStates[[i, col].toString()]) return true;
         }
         return false;
     }
 
-    static numPieceOnRows(col, minRow, maxRow, boardStates) {
+    public numPieceOnRows(col, minRow, maxRow, boardStates) {
         var r = 0;
         for (var i = minRow; i <= maxRow; i++) {
             if (boardStates[[i, col].toString()]) r += 1;
@@ -27,7 +26,7 @@ export class Rule {
 
     // return moves within board range and escape positions occupied by own team
     // boardStates: {posStr->[name, isMyPiece]}
-    static filterBoundedMoves(currRow, currCol, moves, boardStates) {
+    public filterBoundedMoves(currRow, currCol, moves, boardStates) {
         // filter out invalied move
         return moves.filter(m => (
             (m[0] != currRow || m[1] != currCol) &&
@@ -40,7 +39,7 @@ export class Rule {
     }
 
 
-    static movesOnSameLine(currRow, currCol, boardStates) {
+    public movesOnSameLine(currRow, currCol, boardStates) {
         var moves = [];
         for (var i = currRow + 1; i <= this.maxRow; i++) {
             var k = [i, currCol].toString();
@@ -78,12 +77,12 @@ export class Rule {
     }
 
     // Ju
-    static possibleMovesForJu(currRow, currCol, boardStates) {
+    public possibleMovesForJu(currRow, currCol, boardStates) {
         return this.movesOnSameLine(currRow, currCol, boardStates);
     }
 
     // Ma
-    static possibleMovesForMa(currRow, currCol, boardStates) {
+    public possibleMovesForMa(currRow, currCol, boardStates) {
         var moves = [];
         if (!([currRow + 1, currCol].toString() in boardStates)) {
             moves.push([currRow + 2, currCol + 1]);
@@ -106,7 +105,7 @@ export class Rule {
 
 
 
-    static findFirstOpponentOnRow(row, startCol, states, team, incFn) {
+    public findFirstOpponentOnRow(row, startCol, states, team, incFn) {
         while (startCol >= this.minCol && startCol <= this.maxCol) {
             var k = [row, startCol].toString();
             if (k in states) {
@@ -116,7 +115,7 @@ export class Rule {
             startCol = incFn(startCol);
         }
     }
-    static findFirstOpponentOnCol(col, startRow, states, team, incFn) {
+    public findFirstOpponentOnCol(col, startRow, states, team, incFn) {
         while (startRow >= this.minRow && startRow <= this.maxRow) {
             var k = [startRow, col].toString();
             if (k in states) {
@@ -129,7 +128,7 @@ export class Rule {
 
 
     // Pao
-    static possibleMovesForPao(currRow, currCol, boardStates, team) {
+    public possibleMovesForPao(currRow, currCol, boardStates, team) {
         var inc = (x => x + 1);
         var dec = (x => x - 1);
         var moves = [];
@@ -173,7 +172,7 @@ export class Rule {
     }
 
     // Shi
-    static possibleMovesForShi(currRow, currCol, boardStates, isLowerTeam) {
+    public possibleMovesForShi(currRow, currCol, boardStates, isLowerTeam) {
         var moves = [];
         if (2 == currRow || currRow == 9) { // in the center
             moves = [
@@ -189,7 +188,7 @@ export class Rule {
     }
 
     // King
-    static possibleMovesForKing(currRow, currCol, boardStates) {
+    public possibleMovesForKing(currRow, currCol, boardStates) {
         var moves = [];
         for (var col = 4; col <= 6; col++)  moves.push([currRow, col]);
         if (currRow < 5) {
@@ -202,7 +201,7 @@ export class Rule {
     }
 
     // Xiang
-    static possibleMovesForXiang(currRow, currCol, boardStates, isLowerTeam) {
+    public possibleMovesForXiang(currRow, currCol, boardStates, isLowerTeam) {
         var moves = [];
         var canMoveDowward = (isLowerTeam || currRow >= 8);
         var canMoveUpward = (currRow <= 3 || !isLowerTeam);
@@ -214,7 +213,7 @@ export class Rule {
     }
 
     // Zu
-    static possibleMovesForZu(currRow, currCol, boardStates, isLowerTeam) {
+    public possibleMovesForZu(currRow, currCol, boardStates, isLowerTeam) {
         var beyond = isLowerTeam ? (currRow > 5) : (currRow <= 5); //beyond the river
         var moves = isLowerTeam ? [[currRow + 1, currCol]] : [[currRow - 1, currCol]];
         if (beyond) {
@@ -227,17 +226,14 @@ export class Rule {
 
 
     // all legal moves for a piece in a board state
-    // boardStates: {arr[ posStr ]->[name, isMyPiece]}
+    // boardStates: {posStr->[name, isMyPiece]}
     // return [(row, col)]
     static possibleMoves = function(piece: Piece, boardStates: {}, isLowerTeam) {
+        var name = piece.name[0];
         var currRow = piece.position[0];
         var currCol = piece.position[1];
-        var reverse = piece.Reverse;
         var moves = [];
-        var name = piece.name[0]; // name is string  ,this name = one charater , so that  name of piece= string [0] 
-        var truthname = piece.truthname[0];
-        
-        if (reverse) piece.update(truthname);
+
         switch (name) {
             case 'j':
                 moves = this.possibleMovesForJu(currRow, currCol, boardStates);
@@ -271,7 +267,7 @@ export class Rule {
     static allPossibleMoves = function(myPieces: Piece[], boardStates: {}, team) {
         var moves = {};
         // team is in the lower part of the river
-        var isLowerTeam = (team == 1);  
+        var isLowerTeam = (team == 1);
         for (var i in myPieces) {
             var piece = myPieces[i];
             var moves4Piece = this.possibleMoves(piece, boardStates, isLowerTeam);
